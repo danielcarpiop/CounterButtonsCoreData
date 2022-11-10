@@ -20,17 +20,19 @@ class ViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareCounter()
         addTargets()
         fetchInt()
-    }
-    func prepareCounter(){
-        let newValue = Entity(context: self.context)
-        newValue.valueCD = valueInt
-        do {
-            try self.context.save()
-        }
-        catch {
+        if ((items?.first?.valueCD) != nil) {
+            valueInt = (items?.first?.valueCD)!
+        } else {
+            valueInt = 0
+            let newValue = Entity(context: self.context)
+            newValue.valueCD = valueInt
+            do {
+                try self.context.save()
+            }
+            catch {
+            }
         }
     }
     
